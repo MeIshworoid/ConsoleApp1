@@ -1,6 +1,7 @@
 ﻿using Customer.Ado;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ConsoleApp1
 {
@@ -11,18 +12,18 @@ namespace ConsoleApp1
             //getall
             DAO dao = new DAO();
 
-            foreach (DataRow row in dao.GetAllData().Rows)
-            {
+            //foreach (DataRow row in dao.GetAllData().Rows)
+            //{
 
-                Console.WriteLine($"Customer Id: {row["Id"]}\n Customer Name: {row["Name"]}");
-            }
+            //    Console.WriteLine($"Customer Id: {row["Id"]}\n Customer Name: {row["Name"]}");
+            //}
 
             //insert
-            //string name = "Manoj";
-            //SqlParameter[] sqlParameters = new SqlParameter[]
-            //{
-            //    new SqlParameter("@Name",name)
-            //};
+            string name = "Manoj";
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@Name",name)
+            };
             //int result = dao.UpdateData(Sqls.InsertCustomer, sqlParameters);
 
             //if (result > 0)
@@ -31,7 +32,13 @@ namespace ConsoleApp1
             //}
 
             ////getallbyname
-            //DataTable dtCustomersByName = dao.GetAllData(parameters);
+            DataTable dtCustomersByName = dao.GetAllData(Sqls.GetALLByName, sqlParameters);
+            foreach (DataRow row in dtCustomersByName.Rows)
+            {
+
+                Console.WriteLine($"Customer Id: {row["Id"]}\n Customer Name: {row["Name"]}");
+            }
+
 
             ////getbyname
             //var customer = dao.GetByName(name);

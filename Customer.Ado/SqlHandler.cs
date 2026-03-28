@@ -1,11 +1,11 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace Customer.Ado
 {
     public static class SqlHandler
     {
-        private const string _connectionString = "Server=.;Database=CSharpPractise;TrustServerCertificate=True;";
+        private const string _connectionString = "Server=.;Database=CSharpPractise;Trusted_Connection=True;";
 
         //sqldatareader(needs always connection open) and sqldataadapter(only open when needed, after data came then close) => data read from database
         //executenonquery for dml => update,insert, delete

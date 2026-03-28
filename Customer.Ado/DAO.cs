@@ -1,25 +1,27 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace Customer.Ado
 {
     public class DAO
     {
         //read
-        public DataTable GetAllData(SqlParameter[] sqlParameters = null)
+        public DataTable GetAllData()
         {
             DataTable dtCustomer = new DataTable();
 
-            //var sqldataadapter = SqlHandler.FetchWithClose(Sqls.GetALL, parameters);
-            //sqldataadapter.Fill(dtCustomer);
+            var sqldataadapter = SqlHandler.FetchWithClose(Sqls.GetALL);
+            sqldataadapter.Fill(dtCustomer);
 
-            var connection = SqlHandler.GetConnection();
+            return dtCustomer;
+        }
 
-            SqlCommand cmd = new SqlCommand(Sqls.GetALL, connection);
+        public DataTable GetAllData(string sql, SqlParameter[] sqlParameters = null)
+        {
+            DataTable dtCustomer = new DataTable();
 
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-
-            sda.Fill(dtCustomer);
+            var sqldataadapter = SqlHandler.FetchWithClose(sql, sqlParameters);
+            sqldataadapter.Fill(dtCustomer);
 
             return dtCustomer;
         }
